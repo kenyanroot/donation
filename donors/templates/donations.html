@@ -1,0 +1,85 @@
+{% extends 'donor_base.html' %}
+{% block content %}
+  <!-- /Navigation-->
+  <div class="content-wrapper">
+    <div class="container-fluid">
+      <!-- Breadcrumbs-->
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href="#">Dashboard</a>
+        </li>
+        <li class="breadcrumb-item active">Donations</li>
+      </ol>
+		<div class="box_general">
+			<div class="header_box">
+				<h2 class="d-inline-block">Donations List</h2>
+{#				<div class="filter">#}
+{#					<a class="btn_1" href="{% url 'create_donation' %}">Create</a>#}
+{#				</div>#}
+			</div>
+			<div class="list_general">
+				<ul>
+                    {% for donation in donations %}
+					<li>
+						<figure><img src="{{ donation.poster.url }}" alt=""></figure>
+						<h4>{{ donation.donor }}{% if  donation.delivered  %}  <i class="approved">Done</i>  {% else %} <i class="pending">Pending</i> {% endif %}</h4>
+						<ul class="booking_details">
+							<li><strong>Created date</strong> {{ donation.date_added }}</li>
+							<li><strong>Description:</strong>{{ donation.donatio_description }} </li>
+							<li><strong>Dropoff </strong> {{ donation.dropoff_address }}</li>
+							<li><strong>Delivered:</strong> {{ donation.delivered }}</li>
+                            {% if donation.delivered %}
+							<li><strong>Donor</strong> {{ donation.donor }}</li>
+                            {% endif %}
+                        <li><strong>Project Manager:</strong> {{ donation.project_managers }}</li>
+						</ul>
+{#						<ul class="buttons">#}
+{#							<li><a href="#0" class="btn_1 gray approve"><i class="fa fa-fw fa-check-circle-o"></i> Approve</a></li>#}
+{#							<li><a href="#0" class="btn_1 gray delete"><i class="fa fa-fw fa-times-circle-o"></i> Cancel</a></li>#}
+{#						</ul>#}
+					</li>
+                        {% empty %}
+                        <h4>No donations Made</h4>
+
+                    {% endfor %}
+
+				</ul>
+			</div>
+		</div>
+		<!-- /box_general-->
+
+    <nav aria-label="...">
+    
+   <ul class="pagination pagination-sm add_bottom_30">
+        {% if donations.has_previous %}
+            <a class="page-item" href="?page=1">&laquo; first</a>
+            <a  class="page-item" href="?page={{ donations.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current page-item">
+            Page {{ donations.number }} of {{ donations.paginator.num_pages }}.
+        </span>
+
+        {% if donations.has_next %}
+            <a  class="page-item" href="?page={{ donations.next_page_number }}">next</a>
+            <a class="page-item" href="?page={{ donations.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+
+{#			<ul class="pagination pagination-sm add_bottom_30">#}
+{#				<li class="page-item disabled">#}
+{#					<a class="page-link" href="#" tabindex="-1">Previous</a>#}
+{#				</li>#}
+{#				<li class="page-item"><a class="page-link" href="#">1</a></li>#}
+{#				<li class="page-item"><a class="page-link" href="#">2</a></li>#}
+{#				<li class="page-item"><a class="page-link" href="#">3</a></li>#}
+{#				<li class="page-item">#}
+{#					<a class="page-link" href="#">Next</a>#}
+{#				</li>#}
+{#			</ul>#}
+{#		</nav>#}
+		<!-- /pagination-->
+	  </div>
+	  <!-- /container-fluid-->
+   	</div>
+    <!-- /container-wrapper-->
+{% endblock %}

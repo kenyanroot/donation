@@ -1,0 +1,80 @@
+{% extends 'ngo_base.html' %}
+{% block content %}
+
+    <div class="content-wrapper">
+        <div class="container-fluid">
+            <div class="box_general padding_bottom">
+                {% if messages %}
+                    <ul class="messages">
+                        {% for message in messages %}
+                            <li style="color: red;" {% if message.tags %} class="{{ message.tags }}"{% endif %}>
+                                {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}Important: {% endif %}
+                                {{ message }}
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+                <div class="header_box version_2">
+                    <h2><i class="fa fa-user"></i>Create Donation</h2>
+                </div>
+                <form method="post" enctype="multipart/form-data" action="{% url 'create_donation_ngo' %}">{% csrf_token %}
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Poster</label>
+                               <input  class="form-control" type="file" name="poster">
+                            </div>
+                        </div>
+                        <div class="col-md-8 add_top_30">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Donation Type</label>
+                                        <input  class="form-control" type="text" name="donation_type">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Donation Description</label>
+
+                                        <textarea  class="form-control" type="textarea" name="donatio_description">
+                                            </textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /row-->
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Project Manager</label>
+                                            <select name="project_managers">
+
+                                                {% for project_manager in project_managers %}
+                                                    <option value="{{ project_manager.pk }}">{{ project_manager.name }}</option>
+                                                {% endfor %}
+                                            </select>
+
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Pick up station</label>
+                                      <select name="dropoff_address">
+                                            <option>Select Pick up station</option>
+                                            {% for pick_up_station in pickup_centers %}
+                                                <option value="{{ pick_up_station.pk }}">{{ pick_up_station.name }}</option>
+                                            {% endfor %}
+                                        </select>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /row-->
+                        </div>
+                        <input type="submit" class="btn_1" value="Create">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
