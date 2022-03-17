@@ -223,12 +223,12 @@ def signup_beneficiary(request):
 def signup_pm(request):
     if request.method == 'POST':
         # get the post parameters
-        first_name = request.POST['first_name']
-        last_name = request.POST['last_name']
-        username = request.POST['email']
+        # first_name = request.POST['first_name']
+        # last_name = request.POST['last_name']
+        # username = request.POST['email']
         email = request.POST['email']
         password = request.POST['password']
-        password2 = request.POST['password_confirm']
+        password2 = request.POST['confirm-password']
         # phone_number = request.POST['phone_number']
 
         # check if passwords match
@@ -250,8 +250,9 @@ def signup_pm(request):
 
                 user.refresh_from_db()
                 profile = ProjectManager.objects.filter(user=user).get()
-                profile.first_name = first_name
-                profile.last_name = last_name
+                print('fffffffffffffffffffffffffffff',profile)
+                # profile.first_name = first_name
+                # profile.last_name = last_name
                 # profile.contact_number = phone_number
                 profile.email = email
                 profile.save()
@@ -319,11 +320,7 @@ def login_view(request):
                 if ProjectManager.objects.filter(user=request.user).get().email_confirmed == False:
                     messages.error(request, 'Your account is not yet activated')
                     return redirect('login')
-                elif ProjectManager.objects.filter(user=request.user).get().is_verified == False:
-                    print('----------------health facility')
-                    messages.error(request,
-                                   'Your account is not yet Approved. Please be patient as we review your application')
-                    return redirect('login')
+
 
                 else:
                     return redirect('/profile')
@@ -411,34 +408,39 @@ def profile_view(request):
             # check if the users email is confirmed
             if Donors.objects.filter(user=request.user).get().email_confirmed == False:
                 messages.error(request, 'Your account is not yet activated')
-                return redirect('donorsprofile')
+                return redirect('login')
             else:
+                pk=Donors.objects.filter(user=request.user).get().pk
 
-                return redirect('donorsprofile')
+                return redirect(f'/donor/{pk}')
 
         elif ProjectManager.objects.filter(user=request.user):
             if ProjectManager.objects.filter(user=request.user).get().email_confirmed == False:
                 messages.error(request, 'Your account is not yet activated')
                 return redirect('login')
             else:
+                pk=ProjectManager.objects.filter(user=request.user).get().pk    #get the primary key of the project manager
 
-                return redirect('pmpage')
+                return redirect(f'/updatePm/{pk}')
 
         elif NgoProfile.objects.filter(user=request.user):
             if NgoProfile.objects.filter(user=request.user).get().email_confirmed == False:
                 messages.error(request, 'Your account is not yet activated')
                 return redirect('login')
             else:
+                ngo=NgoProfile.objects.filter(user=request.user).get()
+                pk=ngo.pk
 
-                return redirect('ngoprofile')
+                return redirect(f'/ngo/update/{pk}')
 
         elif Beneficiary.objects.filter(user=request.user):
             if Beneficiary.objects.filter(user=request.user).get().email_confirmed == False:
                 messages.error(request, 'Your account is not yet activated')
                 return redirect('login')
             else:
+                pk=Beneficiary.objects.filter(user=request.user).get().pk
 
-                return redirect('beneficiary')
+                return redirect(f'beneficiary/update/{pk}')
 
 
         else:

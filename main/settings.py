@@ -152,5 +152,5 @@ EMAIL_HOST_PASSWORD = 'iitwfuxnsglpfarg#l'  # past the key or password app here
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 LOGOUT_REDIRECT_URL = '/'
-LOGIN_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = 'login'
 AUTH_USER_MODEL = 'authentication.MyUser'

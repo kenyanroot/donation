@@ -4,11 +4,29 @@ from django.contrib.sites.shortcuts import get_current_site
 from django.core.mail import send_mail
 from django.core.paginator import Paginator
 from django.shortcuts import render, redirect
+from django.views.generic import UpdateView
 
 from beneficiaries.models import Donations, PickupStations
 from  .forms import DonorForm
 # Create your views here.
 from .models import Donors
+
+
+class DonorView(UpdateView):
+    model = Donors
+    fields = ('first_name', 'last_name', 'email', 'contact_number', 'address','profile_picture')
+
+    template_name = 'user-profile.html'
+
+    def get_success_url(self):
+        pk = Donors.objects.get(user=self.request.user).pk
+        return f'/donor/{pk}'
+    def get_context_data(self, **kwargs):
+        context = super(DonorView, self).get_context_data(**kwargs)
+        context['pk'] = Donors.objects.get(user=self.request.user).pk
+        print(context['pk'])
+        return context
+
 
 @login_required
 def donorsprofile(request):
@@ -26,11 +44,12 @@ def donorsprofile(request):
 @login_required
 def donations(request):
     donor=Donors.objects.filter(user=request.user).get()
+    pk=Donors.objects.filter(user=request.user).get().pk
     donations_list = Donations.objects.filter(donor=donor).all()
     paginator = Paginator(donations_list, 8)
     page = request.GET.get('page')
     donations = paginator.get_page(page)
-    return render(request, 'donations.html', {'donations': donations})
+    return render(request, 'donations.html', {'donations': donations,'pk':pk,})
 
 @login_required
 def donate(request,pk):
@@ -76,8 +95,10 @@ def donate(request,pk):
 
     else:
         pickups=PickupStations.objects.all()
+        pk=Donors.objects.filter(user=request.user).get().pk
         context={
             'donation':Donations.objects.filter(pk=pk).get(),
             'pickups':pickups,
+            'pk':pk,
         }
         return render(request, 'donate.html',context)

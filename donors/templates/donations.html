@@ -32,6 +32,9 @@
 							<li><strong>Donor</strong> {{ donation.donor }}</li>
                             {% endif %}
                         <li><strong>Project Manager:</strong> {{ donation.project_managers }}</li>
+                        {% if donation.progress_report.file  %}
+                              <li><a href="{{ donation.progress_report.file.url  }}" target="_blank">Progress Report: {{ donation.progress_report.name }}</a> </li>
+                        {% endif %}
 						</ul>
 {#						<ul class="buttons">#}
 {#							<li><a href="#0" class="btn_1 gray approve"><i class="fa fa-fw fa-check-circle-o"></i> Approve</a></li>#}

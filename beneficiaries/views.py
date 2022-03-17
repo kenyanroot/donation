@@ -10,6 +10,31 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView, D
 
 # Create your views here.
 
+
+
+
+class UpdateBeneficiaries(UpdateView):
+    model = Beneficiary
+    fields=('first_name', 'last_name', 'email', 'contact_number', 'address', 'profile_picture')
+    template_name = 'beneficiaries.html'
+
+    def get_success_url(self):
+        pk = Beneficiary.objects.get(user=self.request.user).pk
+        return f'beneficiary/update/{pk}'
+
+    def get_context_data(self, **kwargs):
+        context = super(UpdateBeneficiaries, self).get_context_data(**kwargs)
+        context['pk'] = Beneficiary.objects.get(user=self.request.user).pk
+        print(context['pk'])
+        return context
+
+
+
+
+
+
+
+
 @login_required
 def beneficiary(request):
     if request.method == 'POST':
@@ -42,9 +67,11 @@ def beneficiary(request):
 
 def donations(request):
     beneficiary=Beneficiary.objects.get(user=request.user)
+    pk= beneficiary.pk
     donations=Donations.objects.filter(beneficiary=beneficiary).all()
     context={
         'donations':donations,
+        'pk':pk
     }
 
     return render(request, 'donations_ben.html', context)
@@ -79,11 +106,13 @@ def create_donation(request):
     else:
         project_managers=ProjectManager.objects.all()
         pickup_centers=PickupStations.objects.all()
+        pk=Beneficiary.objects.get(user=request.user).pk
         print(pickup_centers)
 
         context = {
             'project_managers': project_managers,
             'pickup_centers': pickup_centers,
+            'pk':pk
         }
 
 

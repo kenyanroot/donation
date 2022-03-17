@@ -17,7 +17,7 @@
             <form method="post" enctype="multipart/form-data" action="{% url 'donorsprofile' %}">{% csrf_token %}
 			<div class="row">
 				<div class="col-md-4">
-					<div class="form-group">
+					<div style="font-size: .7em;" class="form-group">
 					<label>Your photo</label>
 					{{ form.profile_picture }}
 				    </div>

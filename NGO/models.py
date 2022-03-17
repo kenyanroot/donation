@@ -22,6 +22,7 @@ class NgoProfile(models.Model):
     date_added = models.DateTimeField(auto_now_add=True)
     email_confirmed = models.BooleanField(default=False)
 
+
     def __str__(self):
         return self.first_name + ' ' + self.last_name
     class Meta:
@@ -41,6 +42,8 @@ class NGOdonations(models.Model):
     delivery_failed_reason = models.CharField(max_length=100)
     dropoff_address = models.CharField(max_length=200)
     date_added = models.DateTimeField(auto_now_add=True)
+    accepted= models.BooleanField(default=False)
+    progress_report=models.ForeignKey('NGO.ProgressReports',on_delete=models.CASCADE,null=True,blank=True)
 
     def get_absolute_url(self):
         return reverse('beneficiaries:detail', kwargs={'pk': self.pk})
@@ -50,3 +53,10 @@ class NGOdonations(models.Model):
 
     class Meta:
         verbose_name_plural = 'Donations'
+
+
+class ProgressReports(models.Model):
+    project=models.ForeignKey(NGOdonations, on_delete=models.CASCADE)
+    project_manager=models.ForeignKey(ProjectManager, on_delete=models.CASCADE,null=True, blank=True)
+    name=models.CharField(max_length=100)
+    file=models.FileField(upload_to='beneficiaries/progress_report/')

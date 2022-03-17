@@ -30,8 +30,13 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Donation Type</label>
-                                        <input  class="form-control" type="text" name="donation_type">
+                                        <select class="form-control" name="donation_type">
+
+                                            <option class="form-control" value="1">Cash</option>
+                                            <option class="form-control" value="2">Kind</option>
+                                        </select>
                                     </div>
+
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
@@ -47,10 +52,11 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Project Manager</label>
-                                            <select name="project_managers">
+                                            <select class="form-control" name="project_managers">
+                                            <option> Select PM</option>
 
                                                 {% for project_manager in project_managers %}
-                                                    <option value="{{ project_manager.pk }}">{{ project_manager.name }}</option>
+                                                    <option  class="form-control" value="{{ project_manager.pk }}">{{ project_manager.first_name }}</option>
                                                 {% endfor %}
                                             </select>
 
@@ -59,10 +65,10 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Pick up station</label>
-                                      <select name="dropoff_address">
-                                            <option>Select Pick up station</option>
+                                      <select class="form-control" name="dropoff_address">
+                                            <option class="form-control" >Select Pick up station</option>
                                             {% for pick_up_station in pickup_centers %}
-                                                <option value="{{ pick_up_station.pk }}">{{ pick_up_station.name }}</option>
+                                                <option class="form-control" value="{{ pick_up_station.pk }}">{{ pick_up_station.name }}</option>
                                             {% endfor %}
                                         </select>
 
