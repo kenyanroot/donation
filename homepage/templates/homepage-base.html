@@ -147,12 +147,12 @@
 
     {% endblock %}
 
-    <footer class="footer">
-        <div class="container">
+    <footer style="background-color: #f8f8f8; color: #671e2d;" class="footer">
+        <div style="background-color: #f8f8f8;" class="container">
             <div class="row">
                 <div class="col-md-4 col-sm-12">
-                    <div class="footer-charity-text">
-                        <h2>UWEZO CHARITY</h2>
+                    <div  style="color: #671e2d;" class="footer-charity-text">
+                        <h2 style="color: #671e2d;" >UWEZO CHARITY</h2>
                         <p>Donating to UWEZO charity is a quick and easy way to make a difference in the society </p>
                         <hr>
                         <p><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a><a href="#"><i
@@ -166,10 +166,10 @@
 
                         <div class="col-md-4 col-sm-3">
                             <div class="footer-text two">
-                                <h3>PICKUP STATIONS</h3>
+                                <h3 style="color: #671e2d;" >PICKUP STATIONS</h3>
                                 <ul>
                                     {% for i in pickup_stations %}
-                                    <li>{{ i }}</li>
+                                    <li><a>{{ i.name }}</a></li>
                                     {% endfor %}
 
                                 </ul>
@@ -177,7 +177,7 @@
                         </div>
                         <div class="col-md-4 col-sm-4">
                             <div class="footer-text one">
-                                <h3>CONTACT US</h3>
+                                <h3 style="color: #671e2d;" >CONTACT US</h3>
                                 <ul>
                                     <li><a href="#"><i class="material-icons">location_on</i>1 Street, derby, FL 2147,
                                         USA</a></li>

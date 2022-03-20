@@ -147,10 +147,11 @@ EMAIL_FROM_USER = 'djangoapis2021@gmail.com'
 # gmail_send/settings.py
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'djangoapiks2021@gmail.com'
-EMAIL_HOST_PASSWORD = 'iitwfuxnsglpfarg#l'  # past the key or password app here
+EMAIL_HOST_USER = 'mynetflixanaco@gmail.com'
+EMAIL_HOST_PASSWORD = 'New.horizons1'  # past the key or password app here
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
+FAIL_SILENTLY = False
 LOGOUT_REDIRECT_URL = '/'
-LOGIN_REDIRECT_URL = 'login'
+LOGIN_REDIRECT_URL = '/login'
 AUTH_USER_MODEL = 'authentication.MyUser'

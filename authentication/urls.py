@@ -1,5 +1,5 @@
 from django.urls import path,include
-from .views import login_view,logout_view,activate,account_activation_sent,signup_donor,signup_ngo,signup_beneficiary,signup_pm,profile_view
+from .views import login_view,logout_view,activate,account_activation_sent,signup_donor,signup_ngo,signup_beneficiary,signup_pm,profile_view,loginRedirect
 urlpatterns = [
     path('login/', login_view, name='login'),
     path('logout/', logout_view, name='logout'),
@@ -10,6 +10,8 @@ urlpatterns = [
     path('signup/beneficiary/', signup_beneficiary, name='signup_beneficiary'),
     path('signup/pm/', signup_pm, name='signup_pm'),
     path('profile', profile_view, name='profile_redirect'),
+    path('login/redirect', loginRedirect, name='login_redirect'),
+
 
 
     ]

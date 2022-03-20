@@ -1,4 +1,6 @@
+from django.conf import settings
 from django.contrib.auth.decorators import login_required
+from django.core.mail import send_mail
 from django.shortcuts import render
 from django.views.generic import UpdateView, ListView
 
@@ -105,6 +107,27 @@ def upload_prgress_reports(request, pk):
         # project.progress_report=report
         # project.save()
         messages.success(request, 'Your progress report has been uploaded!')
+        #send email to stakeholders of the project telling the progress report has been uploaded
+        subject = 'Progress report uploaded'
+        message =  'A progress report to a project in which you are a stakeholder has been uploaded.Please log in to your aacount to view it',
+
+        send_mail(
+
+            subject,
+            message,
+            settings.EMAIL_HOST_USER,
+            [project.donor.email],
+            fail_silently=settings.FAIL_SILENTLY,
+
+        )
+        send_mail(
+            subject,
+            message,
+            settings.EMAIL_HOST_USER,
+            [project.beneficiary.email],
+            fail_silently=settings.FAIL_SILENTLY,
+
+        )
         return redirect('projects_list')
     else:
         return redirect('projects_list')

@@ -1,21 +1,24 @@
+from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth import authenticate, logout, get_user_model
 from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
 from django.contrib.sites.shortcuts import get_current_site
 from django.core.mail import send_mail
+from django.http import HttpResponseRedirect
 from django.shortcuts import HttpResponse
 from django.shortcuts import render, redirect
 from django.template.loader import render_to_string
 from django.utils.encoding import force_bytes
 from django.utils.encoding import force_str
 from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
-from beneficiaries.forms import SignUpForm
+
 from NGO.models import NgoProfile
 from authentication.tokens import account_activation_token
+from beneficiaries.forms import SignUpForm
+from beneficiaries.models import Beneficiary
 from donors.models import Donors
 from project_managers.models import ProjectManager
-from beneficiaries.models import Beneficiary
 
 # Create your views here.
 
@@ -25,7 +28,6 @@ User = get_user_model()
 def signup_donor(request):
     # sign up a user
     if request.method == 'POST':
-
 
         email = request.POST['email']
         password = request.POST['password']
@@ -61,23 +63,23 @@ def signup_donor(request):
                 login(request, user)
                 print('user logged in')
                 current_site = get_current_site(request)
-                
-                # subject = 'Activate Your Uwezo Account'
-                # message = render_to_string('account_activation_email.html', {
-                #     'user': user,
-                #     'domain': current_site.domain,
-                #     'uid': urlsafe_base64_encode(force_bytes(user.pk)),
-                #     'token': account_activation_token.make_token(user),
-                # })
-                # send_mail(
-                #
-                #     subject,
-                #     message,
-                #     'djangoapis20213@gmail.com',
-                #     [email],
-                #     fail_silently=False,
-                #
-                # )
+
+                subject = 'Activate Your Uwezo Account'
+                message = render_to_string('account_activation_email.html', {
+                    'user': user,
+                    'domain': current_site.domain,
+                    'uid': urlsafe_base64_encode(force_bytes(user.pk)),
+                    'token': account_activation_token.make_token(user),
+                })
+                send_mail(
+
+                    subject,
+                    message,
+                    settings.EMAIL_HOST_USER,
+                    [email],
+                    fail_silently=settings.FAIL_SILENTLY,
+
+                )
 
                 return redirect('profile_redirect')
 
@@ -116,7 +118,7 @@ def signup_ngo(request):
 
                 user.refresh_from_db()
                 profile = NgoProfile.objects.filter(user=user).get()
-                profile.name=name
+                profile.name = name
 
                 # profile.contact_number = phone_number
                 profile.email = email
@@ -137,9 +139,9 @@ def signup_ngo(request):
 
                     subject,
                     message,
-                    'djangoapis20213@gmail.com',
+                    settings.EMAIL_HOST_USER,
                     [email],
-                    fail_silently=False,
+                    fail_silently=settings.FAIL_SILENTLY,
 
                 )
 
@@ -201,13 +203,13 @@ def signup_beneficiary(request):
 
                     subject,
                     message,
-                    'djangoapis20213@gmail.com',
+                    settings.EMAIL_HOST_USER,
                     [email],
-                    fail_silently=False,
+                    fail_silently=settings.FAIL_SILENTLY,
 
                 )
 
-                return HttpResponse('signup successfull yeeeey')
+                return HttpResponse('signup successfull ')
 
         else:
             messages.info(request, 'Your passwords do not match')
@@ -216,8 +218,7 @@ def signup_beneficiary(request):
     else:
         form = SignUpForm()
 
-        return render(request, 'signup_beneficiary.html',{'form':form})
-
+        return render(request, 'signup_beneficiary.html', {'form': form})
 
 
 def signup_pm(request):
@@ -250,7 +251,7 @@ def signup_pm(request):
 
                 user.refresh_from_db()
                 profile = ProjectManager.objects.filter(user=user).get()
-                print('fffffffffffffffffffffffffffff',profile)
+                print('fffffffffffffffffffffffffffff', profile)
                 # profile.first_name = first_name
                 # profile.last_name = last_name
                 # profile.contact_number = phone_number
@@ -272,9 +273,9 @@ def signup_pm(request):
 
                     subject,
                     message,
-                    'djangoapis20213k@gmail.com',
+                    settings.EMAIL_HOST_USER,
                     [email],
-                    fail_silently=False,
+                    fail_silently=settings.FAIL_SILENTLY,
 
                 )
 
@@ -286,7 +287,6 @@ def signup_pm(request):
 
     else:
         return render(request, 'signup_pm.html')
-
 
 
 def login_view(request):
@@ -330,13 +330,13 @@ def login_view(request):
                     return redirect('login')
                 else:
 
-
                     return redirect('/profile')
 
         else:
             messages.error(request, 'Invalid credentials')
             return redirect('login')
     else:
+
         return render(request, 'login.html')
 
 
@@ -410,7 +410,7 @@ def profile_view(request):
                 messages.error(request, 'Your account is not yet activated')
                 return redirect('login')
             else:
-                pk=Donors.objects.filter(user=request.user).get().pk
+                pk = Donors.objects.filter(user=request.user).get().pk
 
                 return redirect(f'/donor/{pk}')
 
@@ -419,7 +419,8 @@ def profile_view(request):
                 messages.error(request, 'Your account is not yet activated')
                 return redirect('login')
             else:
-                pk=ProjectManager.objects.filter(user=request.user).get().pk    #get the primary key of the project manager
+                pk = ProjectManager.objects.filter(
+                    user=request.user).get().pk  # get the primary key of the project manager
 
                 return redirect(f'/updatePm/{pk}')
 
@@ -428,8 +429,8 @@ def profile_view(request):
                 messages.error(request, 'Your account is not yet activated')
                 return redirect('login')
             else:
-                ngo=NgoProfile.objects.filter(user=request.user).get()
-                pk=ngo.pk
+                ngo = NgoProfile.objects.filter(user=request.user).get()
+                pk = ngo.pk
 
                 return redirect(f'/ngo/update/{pk}')
 
@@ -438,7 +439,7 @@ def profile_view(request):
                 messages.error(request, 'Your account is not yet activated')
                 return redirect('login')
             else:
-                pk=Beneficiary.objects.filter(user=request.user).get().pk
+                pk = Beneficiary.objects.filter(user=request.user).get().pk
 
                 return redirect(f'beneficiary/update/{pk}')
 
@@ -451,3 +452,56 @@ def profile_view(request):
         return HttpResponse('You are not authorized to view this page')
 
 
+def loginRedirect(request):
+    if request.method == 'POST':
+        try:
+            username = request.POST['email']
+            password = request.POST['password']
+        except KeyError as e:
+            print(e)
+            return render(request, 'login_redirect.html')
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+
+            login(request, user)
+            if Donors.objects.filter(user=request.user).exists():
+                # check if user is confirmed
+                if Donors.objects.filter(user=request.user).get().email_confirmed == False:
+                    messages.error(request, 'Your account is not yet activated')
+                    return redirect('login')
+                # elif DoctorProfile.objects.filter(user=request.user).get().is_verified == False:
+                #     messages.error(request, 'Your account is not yet approved. Please be patient as we review your application')
+                #     return redirect('login')
+                else:
+                    print('----------------donor',request.POST)
+                    return HttpResponseRedirect(request.POST.get('next','/'))
+            elif NgoProfile.objects.filter(user=request.user).exists():
+                if NgoProfile.objects.filter(user=request.user).get().email_confirmed == False:
+                    messages.error(request, 'Your account is not yet activated')
+                    return redirect('login')
+                else:
+                    print('----------------ngo')
+
+                    return HttpResponseRedirect(request.POST.get('next'))
+            elif ProjectManager.objects.filter(user=request.user).exists():
+                if ProjectManager.objects.filter(user=request.user).get().email_confirmed == False:
+                    messages.error(request, 'Your account is not yet activated')
+                    return redirect('login')
+
+
+                else:
+                    HttpResponseRedirect(request.POST.get('next','/'))
+            elif Beneficiary.objects.filter(user=request.user).exists():
+                if Beneficiary.objects.filter(user=request.user).get().email_confirmed == False:
+                    messages.error(request, 'Your account is not yet activated')
+                    return redirect('login')
+                else:
+
+                    HttpResponseRedirect(request.POST.get('next','/'))
+
+        else:
+            messages.error(request, 'Invalid credentials')
+            return redirect('login')
+    else:
+
+        return render(request, 'login_redirect.html')

@@ -7,10 +7,16 @@ def index(request):
 
     donations_count=Donations.objects.all().count()
     pickup_stations=PickupStations.objects.all()
+    beneficiaries_count=Donations.objects.all().count()
+    causes_count=Donations.objects.all().count()
+    pickup_stations_count=PickupStations.objects.all().count()
     context = {
         'donations': Donations.objects.all()[:10],
         'donations_count': donations_count,
         'pickup_stations': pickup_stations,
+        'beneficiaries_count': beneficiaries_count,
+        'causes_count': causes_count,
+        'pickup_stations_count': pickup_stations_count,
 
     }
 
