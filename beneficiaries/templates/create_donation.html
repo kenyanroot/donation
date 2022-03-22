@@ -1,4 +1,4 @@
-{% extends 'ngo_base.html' %}
+{% extends 'beneficiary_base.html' %}
 {% block content %}
 
     <div class="content-wrapper">
@@ -17,7 +17,7 @@
                 <div class="header_box version_2">
                     <h2><i class="fa fa-user"></i>Create Donation</h2>
                 </div>
-                <form method="post" enctype="multipart/form-data" action="{% url 'create_donation_ngo' %}">{% csrf_token %}
+                <form method="post" enctype="multipart/form-data" action="{% url 'create_donation' %}">{% csrf_token %}
                     <div class="row">
                         <div class="col-md-4">
                             <div class="form-group">
@@ -49,24 +49,24 @@
                             </div>
                             <!-- /row-->
                             <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Project Manager</label>
-                                            <select class="form-control" name="project_managers">
-                                            <option> Select PM</option>
-
-                                                {% for project_manager in project_managers %}
-                                                    <option  class="form-control" value="{{ project_manager.pk }}">{{ project_manager.first_name }}</option>
-                                                {% endfor %}
-                                            </select>
-
-                                    </div>
-                                </div>
+{#                                <div class="col-md-6">#}
+{#                                    <div class="form-group">#}
+{#                                        <label>Project Manager</label>#}
+{#                                            <select class="form-control" name="project_managers">#}
+{#                                            <option> Select PM</option>#}
+{##}
+{#                                                {% for project_manager in project_managers %}#}
+{#                                                    <option  class="form-control" value="{{ project_manager.pk }}">{{ project_manager.first_name }}</option>#}
+{#                                                {% endfor %}#}
+{#                                            </select>#}
+{##}
+{#                                    </div>#}
+{#                                </div>#}
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Pick up station</label>
                                       <select class="form-control" name="dropoff_address">
-                                            <option class="form-control" >Select Pick up station</option>
+                                            <option class="form-control" >Pick up station for non cash donations</option>
                                             {% for pick_up_station in pickup_centers %}
                                                 <option class="form-control" value="{{ pick_up_station.pk }}">{{ pick_up_station.name }}</option>
                                             {% endfor %}

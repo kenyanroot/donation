@@ -362,29 +362,34 @@ def activate(request, uidb64, token):
             donor = Donors.objects.filter(user=user).get()
             donor.email_confirmed = True
             donor.save()
-            login(request, user)
-            return redirect('doctorsProfilePage')
+
+            return redirect('login')
 
         elif NgoProfile.objects.filter(user=user):
             ngo = NgoProfile.objects.filter(user=user).get()
             ngo.email_confirmed = True
             ngo.save()
-            login(request, user)
+
 
             print('********************patient yeeeeeeeeeeeeeeey')
-            return redirect('patientprofilepage')
+            return redirect('login')
 
         elif ProjectManager.objects.filter(user=user):
             pm = ProjectManager.objects.filter(user=user).get()
             pm.email_confirmed = True
             pm.save()
-            context = {
-                'pm': pm,
-            }
 
-            login(request, user)
-            return render(request, 'healthfacilities/index.html', context)
+
+
+            return redirect('login')
+        elif Beneficiary.objects.filter(user=user):
+            beneficiary = Beneficiary.objects.filter(user=user).get()
+            beneficiary.email_confirmed = True
+            beneficiary.save()
+
+            return redirect('login')
         else:
+
             return HttpResponse('You are not authorized to view this page')
 
 

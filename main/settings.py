@@ -123,7 +123,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Africa/Nairobi'
 
 USE_I18N = True
 
@@ -142,9 +142,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 
-
-EMAIL_FROM_USER = 'djangoapis2021@gmail.com'
-# gmail_send/settings.py
+#
+# EMAIL_FROM_USER = 'djangoapis2021@gmail.com'
+# # gmail_send/settings.py
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'mynetflixanaco@gmail.com'
@@ -155,3 +155,4 @@ FAIL_SILENTLY = False
 LOGOUT_REDIRECT_URL = '/'
 LOGIN_REDIRECT_URL = '/login'
 AUTH_USER_MODEL = 'authentication.MyUser'
+

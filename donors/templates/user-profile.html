@@ -14,7 +14,7 @@
 			<div class="header_box version_2">
 				<h2><i class="fa fa-user"></i>Profile details</h2>
 			</div>
-            <form method="post" enctype="multipart/form-data" action="{% url 'donorsprofile' %}">{% csrf_token %}
+            <form method="post" enctype="multipart/form-data" action="{% url 'donor' pk %}">{% csrf_token %}
 			<div class="row">
 				<div class="col-md-4">
 					<div style="font-size: .7em;" class="form-group">

@@ -27,22 +27,22 @@ class DonorView(UpdateView):
     def get_context_data(self, **kwargs):
         context = super(DonorView, self).get_context_data(**kwargs)
         context['pk'] = Donors.objects.get(user=self.request.user).pk
-        print(context['pk'])
+        print('hhhhhhhhhh',context['pk'])
         return context
 
 
-@login_required(login_url='/login/redirect')
-def donorsprofile(request):
-    if request.method == 'POST':
-        form = DonorForm(request.POST)
-        if form.is_valid():
-            form.save()
-            messages.success(request, 'Your profile has been updated!')
-            return redirect('donorsprofile')
-    else:
-        form = DonorForm()
-
-    return render(request, 'user-profile.html', {'form': form})
+# @login_required(login_url='/login/redirect')
+# def donorsprofile(request):
+#     if request.method == 'POST':
+#         form = DonorForm(request.POST)
+#         if form.is_valid():
+#             form.save()
+#             messages.success(request, 'Your profile has been updated!')
+#             return redirect('donorsprofile')
+#     else:
+#         form = DonorForm()
+#
+#     return render(request, 'user-profile.html', {'form': form})
 
 
 @login_required(login_url='/login/redirect')
@@ -111,7 +111,7 @@ def donate(request, pk):
             pk = Donors.objects.filter(user=request.user).get().pk
             context = {
                 'donation': Donations.objects.filter(pk=pkay).get(),
-                'pickups': pickups,
+                'pickup_stations': pickups,
                 'pk': pk,
             }
             return render(request, 'donate.html', context)

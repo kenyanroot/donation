@@ -88,10 +88,10 @@ def create_donation(request):
         poster = request.FILES.get('poster')
         donatio_description = request.POST.get('donatio_description')
         dropoff_address = request.POST.get('dropoff_address')
-        print(project_managers)
+        print(poster,'llllllllllllllllllllllllllllllllllllllll')
         beneficiary=Beneficiary.objects.get(user=request.user)
         if project_managers != None:
-            donation = Donations( beneficiary=beneficiary,project_managers=project_managers, amount=amount, donation_type=donation_type, poster=poster, donatio_description=donatio_description, dropoff_address=dropoff_address)
+            donation = Donations( beneficiary=beneficiary, amount=amount, donation_type=donation_type, poster=poster, donatio_description=donatio_description, dropoff_address=dropoff_address)
             donation.save()
         else:
             donation = Donations( beneficiary=beneficiary,amount=amount, donation_type=donation_type,
