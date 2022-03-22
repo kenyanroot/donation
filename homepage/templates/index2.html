@@ -1,221 +1,197 @@
 {% extends 'homepage-base.html' %}
-{% load static  %}
+{% load static %}
 {% block content %}
+    <script src="https://code.jquery.com/jquery-3.6.0.js"
+            integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
     <style>
-    .volunteer_area{
-        margin-top: 0 !important;
-        {#position: relative;#}
-        {#top: -100px;#}
-    }
+        .volunteer_area {
+            margin-top: 0 !important;
+        {#position: relative;#}{#top: -100px;#}
+        }
 
-.our_cuauses .our_cuauses_single{
-    margin-bottom: 0;
-    margin-top: 0;
-}
+        .our_cuauses .our_cuauses_single {
+            margin-bottom: 0;
+            margin-top: 0;
+        }
     </style>
-        <section class="carosal-area">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div  style="background-image: url('{% static "img/donation1.jpg" %}');"  class="client owl-carousel owl-theme">
-                            <div class="item">
-                                <div  class="text">
-                                    <h3>YOUR COMMUNITY NEEDS YOUR HELP</h3>
-                                    <p>Like our name suggests, we are here to enable. We Connect the more privileged with those in need.<br> Click on the Donate button to view the causes listed on Uwezo </p>
-                                    <h5 class="white-button"><a href="{% url 'causes' %}">DONATE NOW</a></h5>
-                                    <h5><a href="#">CONTACT US</a></h5>
-                                </div>
+
+    <section class="carosal-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div style="background-image: url('{% static "img/donation1.jpg" %}');"
+                         class="client owl-carousel owl-theme">
+                        <div class="item">
+                            <div class="text">
+                                <h3>YOUR COMMUNITY NEEDS YOUR HELP</h3>
+                                <p>Like our name suggests, we are here to enable. We Connect the more privileged with
+                                    those in need.<br> Click on the Donate button to view the causes listed on Uwezo
+                                </p>
+                                <h5 class="white-button"><a href="{% url 'causes' %}">DONATE NOW</a></h5>
+                                <h5><a href="#">CONTACT US</a></h5>
                             </div>
-                            <div class="item">
-                                <div  class="text">
-                                    <h3>YOUR COMMUNITY NEEDS YOUR HELP</h3>
-                                    <p>Join the movement to transform your community <!--wordings for charity -->. </p>
-                                    <h5 class="white-button"><a href="{% url 'causes' %}">DONATE NOW</a></h5>
-                                    <h5><a href="#">CONTACT US</a></h5>
-                                </div>
+                        </div>
+                        <div class="item">
+                            <div class="text">
+                                <h3>YOUR COMMUNITY NEEDS YOUR HELP</h3>
+                                <p>Join the movement to transform your community <!--wordings for charity -->. </p>
+                                <h5 class="white-button"><a href="{% url 'causes' %}">DONATE NOW</a></h5>
+                                <h5><a href="#">CONTACT US</a></h5>
                             </div>
+                        </div>
 
 
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <section class="our_activity">
-            <h2>OUR ACTIVITIES</h2>
-            <p>Join Us as we carry out various community transformation activities like fundraisers,<br>visits to the less privilleged among others </p>
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-4 col-xs-12">
-                        <div class="single-Promo">
-                            <div class="promo-icon">
-                                <i class="material-icons">near_me</i>
-                            </div>
-                            <h2><a href="#">Fundraising</a></h2>
-                            <p>We occasionally hold fund raising events to accumulate funds that are channelled to help the less fortunate in the society. </p>
-                        </div>
-                    </div>
-                    <div class="col-md-4 col-xs-12">
-                        <div class="single-Promo">
-                            <div class="promo-icon">
-                                <i class="material-icons">favorite</i>
-                            </div>
-                            <h2><a href="#">Volunteering</a></h2>
-                            <p>Show up and make a difference by dedicating your time and skills to service.It is indeed true that one man can change the world </p>
-                        </div>
-                    </div>
-                    <div class="col-md-4 col-xs-12">
-                        <div class="single-Promo">
-                            <div class="promo-icon">
-                                <i class="material-icons">dashboard</i>
-                            </div>
-                            <h2><a href="#">Our Programs</a></h2>
-                            <p>Some of our programs like Lipa fees are intended to reach those who cannot reach us.Please Contact us for more information </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <section class="donate_section">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12 for-padding">
-                        <h4>Find something you can help with</h4>
-                        <h3>Books,Clothes,Whatever it is </h3>
-                        <p>The little things, The least noticeable ones often make the most difference. Whatever little or much contribution you have can go a long way</p>
-
-{#                        <div class="progress-text">#}
-{#                            <p class="progress-top">50%</p>#}
-{#                            <div class="progress">#}
-{#                                <div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:50%"></div>#}
-{#                            </div>#}
-{#                            <p class="progress-left">Raised: $1200</p>#}
-{#                            <p class="progress-right">Goal: $2400</p>#}
-{#                        </div>#}
-                        <h2><a href="{% url 'causes' %}">View Causes</a></h2>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-
-        <div class="block-wrapper">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-3 col-sm-3 col-xs-6 for-border">
-                        <div class="block">
-                            <p style="color: #a9a9a9;"><i style="color:#671e2d !important;  " class="material-icons">favorite</i></p>
-                            <p style="color: #a9a9a9;" class="counter-wrapper"><span style="color: #a9a9a9;" >{{ causes_count }}</span></p>
-                            <p style="color: #a9a9a9;" class="text-block">CAUSES</p>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-sm-3 col-xs-6 for-border">
-                        <div class="block">
-                            <p style="color: #a9a9a9;"><i style="color:#671e2d !important;
-                                " class="material-icons">language</i></p>
-                            <p class="counter-wrapper"><span style="color: #a9a9a9;">{{ pickup_stations_count }}</span></p>
-                            <p style="color: #a9a9a9;" class="text-block">Pick up Centers</p>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-sm-3 col-xs-6 for-border">
-                        <div class="block">
-                            <p style="color: #a9a9a9;"><i style="color:#671e2d !important; 
-                                " class="material-icons">person_add</i></p>
-                            <p style="color: #a9a9a9;" class="counter-wrapper">
-                                <span style="color: #a9a9a9;"
-                                      >{{ beneficiaries_count }}
-                                    </span>
-                            </p>
-                            <p style="color: #a9a9a9;" class="text-block">Beneficiaries</p>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-sm-3 col-xs-6 for-border">
-                        <div class="block">
-                            <p style="color: #a9a9a9;"><i style="color:#671e2d !important;
-                                " class="material-icons">people</i></p>
-                            <p class="counter-wrapper"><span style="color: #a9a9a9;">3</span></p>
-                            <p class="text-block">Volunteers</p>
-                        </div>
                     </div>
                 </div>
             </div>
         </div>
-        <section class="our_cuauses">
-            <h2>OUR CAUSES</h2>
-            <p>Take a glimpse at urgent causes you can assist with. </p>
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="our_cuauses_single owl-carousel owl-theme">
-                            {% for i in donations %}
-                            <div   class="item">
-                                <img style="height: 200px;"src="{{ i.poster.url }}" alt="">
-                                <div style="padding: 10px; text-align: center;" class="">
-                                    <p>{{ i.title}}</p>
-                                    <p>{{ i.donatio_description }}</p>
-{#                                    <div class="progress-text">#}
-{#                                        <p class="progress-top">50%</p>#}
-{#                                        <div class="progress">#}
-{#                                            <div class="progress-bar" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width:50%"></div>#}
-{#                                        </div>#}
-{#                                        <p class="progress-left">Raised: <span>$1200</span></p>#}
-{#                                        <p class="progress-right">Goal: <span>$2400</span></p>#}
-{#                                    </div>#}
-                                    <h2 class=""><a href="{% url 'donate' i.pk %}">DONATE NOW</a></h2>
-                                </div>
-
-                            </div>
-                             {% endfor %}
-
+    </section>
+    <section class="our_activity">
+        <h2>OUR ACTIVITIES</h2>
+        <p>Join Us as we carry out various community transformation activities like fundraisers,<br>visits to the less
+            privilleged among others </p>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 col-xs-12">
+                    <div class="single-Promo">
+                        <div class="promo-icon">
+                            <i class="material-icons">near_me</i>
                         </div>
+                        <h2><a href="#">Fundraising</a></h2>
+                        <p>We occasionally hold fund raising events to accumulate funds that are channelled to help the
+                            less fortunate in the society. </p>
+                    </div>
+                </div>
+                <div class="col-md-4 col-xs-12">
+                    <div class="single-Promo">
+                        <div class="promo-icon">
+                            <i class="material-icons">favorite</i>
+                        </div>
+                        <h2><a href="#">Volunteering</a></h2>
+                        <p>Show up and make a difference by dedicating your time and skills to service.It is indeed true
+                            that one man can change the world </p>
+                    </div>
+                </div>
+                <div class="col-md-4 col-xs-12">
+                    <div class="single-Promo">
+                        <div class="promo-icon">
+                            <i class="material-icons">dashboard</i>
+                        </div>
+                        <h2><a href="#">Our Programs</a></h2>
+                        <p>Some of our programs like Lipa fees are intended to reach those who cannot reach us.Please
+                            Contact us for more information </p>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
+    <section class="donate_section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 for-padding">
+                    <h4>Find something you can help with</h4>
+                    <h3>Books,Clothes,Whatever it is </h3>
+                    <p>The little things, The least noticeable ones often make the most difference. Whatever little or
+                        much contribution you have can go a long way</p>
+
+                    {#                        <div class="progress-text">#}
+                    {#                            <p class="progress-top">50%</p>#}
+                    {#                            <div class="progress">#}
+                    {#                                <div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:50%"></div>#}
+                    {#                            </div>#}
+                    {#                            <p class="progress-left">Raised: $1200</p>#}
+                    {#                            <p class="progress-right">Goal: $2400</p>#}
+                    {#                        </div>#}
+                    <h2><a href="{% url 'causes' %}">View Causes</a></h2>
+                </div>
+            </div>
+        </div>
+    </section>
 
 
-{#        <section class="volunteer_area">#}
-{#            <h2>Our Volunteers</h2>#}
-{#            <p>Just a bit of appreciation to these outstanding individuals  <br>They have dedicated their time to keep this Non- Profit running. There is no Us without Them </p>#}
-{#            <div class="container">#}
-{#                <div class="row">#}
-{#                    <div class="col-md-12">#}
-{#                        <div class="volunteer_single owl-carousel owl-theme">#}
-{#                            <div class="item">#}
-{#                                <img src="{% static 'homepage/img/volanteer_1.jpg' %}" alt="">#}
-{#                                <div class="text">#}
-{#                                    <h3>Laura Jammy</h3>#}
-{#                                    <h6>Web Developer</h6>#}
-{#                                    <p>Helps in developing and maintaining this site</p>#}
-{#                                    <h5><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a><a href="#"><i class="fa fa-behance" aria-hidden="true"></i></a></h5>#}
-{#                                </div>#}
-{#                            </div>#}
-{#                            <div class="item">#}
-{#                                <img src="{% static 'homepage/img/volanteer_2.jpg' %}" alt="">#}
-{#                                <div class="text">#}
-{#                                    <h3>Albert R. Ardoin</h3>#}
-{#                                    <h6>Shopkeeper</h6>#}
-{#                                    <p>His knowledge of inventory management has been of great help to us</p>#}
-{#                                    <h5><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a><a href="#"><i class="fa fa-behance" aria-hidden="true"></i></a></h5>#}
-{#                                </div>#}
-{#                            </div>#}
-{##}
-{#                            <div class="item">#}
-{#                                <img src="{% static 'homepage/img/volanteer_2.jpg' %}" alt="">#}
-{#                                <div class="text">#}
-{#                                    <h3>Albert R. Ardoin</h3>#}
-{#                                    <h6>Actor</h6>#}
-{#                                    <p>Lorem ipsum dolor sit amet, consectetur adipisi</p>#}
-{#                                    <h5><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a><a href="#"><i class="fa fa-behance" aria-hidden="true"></i></a></h5>#}
-{#                                </div>#}
-{#                            </div>#}
-{##}
-{#                        </div>#}
-{#                    </div>#}
-{#                </div>#}
-{#            </div>#}
-{#        </section>#}
+    <div class="block-wrapper">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 col-sm-3 col-xs-6 for-border">
+                    <div class="block">
+                        <p style="color: #a9a9a9;"><i style="color:#671e2d !important;  " class="material-icons">favorite</i>
+                        </p>
+                        <p style="color: #a9a9a9;" class="counter-wrapper"><span
+                                style="color: #a9a9a9;">{{ causes_count }}</span></p>
+                        <p style="color: #a9a9a9;" class="text-block">CAUSES</p>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-3 col-xs-6 for-border">
+                    <div class="block">
+                        <p style="color: #a9a9a9;"><i style="color:#671e2d !important;
+                                " class="material-icons">language</i></p>
+                        <p class="counter-wrapper"><span style="color: #a9a9a9;">{{ pickup_stations_count }}</span></p>
+                        <p style="color: #a9a9a9;" class="text-block">Pick up Centers</p>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-3 col-xs-6 for-border">
+                    <div class="block">
+                        <p style="color: #a9a9a9;"><i style="color:#671e2d !important;
+                                " class="material-icons">person_add</i></p>
+                        <p style="color: #a9a9a9;" class="counter-wrapper">
+                                <span style="color: #a9a9a9;"
+                                >{{ beneficiaries_count }}
+                                    </span>
+                        </p>
+                        <p style="color: #a9a9a9;" class="text-block">Beneficiaries</p>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-3 col-xs-6 for-border">
+                    <div class="block">
+                        <p style="color: #a9a9a9;"><i style="color:#671e2d !important;
+                                " class="material-icons">people</i></p>
+                        <p class="counter-wrapper"><span style="color: #a9a9a9;">3</span></p>
+                        <p class="text-block">Volunteers</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <section class="our_cuauses">
+        <h2>OUR CAUSES</h2>
+        <p>Take a glimpse at urgent causes you can assist with. </p>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="our_cuauses_single owl-carousel owl-theme">
 
-    
+                            {% for i in donations %}
 
-    {% endblock %}
+
+
+
+
+
+                                    <div class="card item" style="width: 100%;">
+                                        <img class="card-img-top" style="max-height:250px;" src=" {{ i.poster.url }}" alt="Card image cap">
+                                        <div  style="height: auto;" class="card-body">
+                                            <h5 class="card-title">{{ i.title}}</h5>
+                                            <p class="card-text">{{ i.donatio_description }}</p><br>
+                                            <a href="{% url 'donate' i.pk %}" style="background-color: #671e2d;" class="btn btn-primary">Donate</a>
+                                        </div>
+                                    </div>
+
+
+
+
+
+
+
+
+
+                            {% endfor %}
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+{% endblock %}
