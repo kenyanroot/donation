@@ -1,2 +1,2 @@
-web: gunicorn FinDoc.wsgi
+web: gunicorn main.wsgi
 
