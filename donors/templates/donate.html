@@ -31,7 +31,7 @@
 {#                Thank you for your interest in donating to the {{ project_name }} project.#}
 
             </p>
-            {% if donation.donation_type == 1 %}
+            {% if donation.donation_type == '1' %}
                 <div  class="cont " id="smart-button-container">
                     <div style="text-align: center"><label for="description">Description </label><input class="form-control" type="text"
                                                                                                         name="descriptionInput"
@@ -181,7 +181,7 @@
 
                     initPayPalButton();
                 </script>
-            {% else %}
+            {% elif donation.donation_type == '0' %}
                 <form method="post" action="">{% csrf_token %}
 
                     <div class="form-group">
@@ -213,6 +213,7 @@
 
                 </form>
             {% endif %}
+
 
 
         </div>

@@ -318,6 +318,7 @@ def login_view(request):
                     return redirect('/profile')
             elif ProjectManager.objects.filter(user=request.user).exists():
                 if ProjectManager.objects.filter(user=request.user).get().email_confirmed == False:
+                    print(ProjectManager.objects.filter(user=request.user).get().email_confirmed == False)
                     messages.error(request, 'Your account is not yet activated')
                     return redirect('login')
 

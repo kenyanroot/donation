@@ -70,27 +70,30 @@ class Projects(ListView):
         context = super().get_context_data(**kwargs)
         context['pk'] = ProjectManager.objects.get(user=self.request.user).pk
         pk = context['pk']
-
-        project_manager= ProjectManager.objects.get(user=self.request.user).progress_reports.all()
-
-
-        print(project_manager)
+        #
+        # project_manager= P.objects.get(user=self.request.user).progress_reports.all()
+        #
+        #
+        # print(project_manager)
 
 
         return context
 
 
 def accept_project(request, pk):
-    project = NgoProfile.objects.get(pk=pk)
+    project = NGOdonations.objects.get(pk=pk)
     project.accepted = True
+
     project.save()
-    return redirect('projects')
+    project = NGOdonations.objects.get(pk=pk)
+    print(project.accepted,'lllllll')
+    return redirect('projects_list')
 
 def reject_project(request, pk):
-    project = NgoProfile.objects.get(pk=pk)
+    project = NGOdonations.objects.get(pk=pk)
     project.accepted = False
     project.save()
-    return redirect('projects')
+    return redirect('projects_list')
 
 
 def upload_prgress_reports(request, pk):
@@ -107,24 +110,29 @@ def upload_prgress_reports(request, pk):
         # project.progress_report=report
         # project.save()
         messages.success(request, 'Your progress report has been uploaded!')
-        #send email to stakeholders of the project telling the progress report has been uploaded
+
+            #send email to stakeholders of the project telling the progress report has been uploaded
         subject = 'Progress report uploaded'
-        message =  'A progress report to a project in which you are a stakeholder has been uploaded.Please log in to your aacount to view it',
+        message =  'A progress report to a project in which you are a stakeholder has been uploaded.Please log in to your aacount to view it'
+
+
+
+        if project.donor:
+            send_mail(
+
+                subject,
+                message,
+                settings.EMAIL_HOST_USER,
+                [str(project.donor.email)],
+                fail_silently=settings.FAIL_SILENTLY,
+
+            )
 
         send_mail(
-
             subject,
             message,
             settings.EMAIL_HOST_USER,
-            [project.donor.email],
-            fail_silently=settings.FAIL_SILENTLY,
-
-        )
-        send_mail(
-            subject,
-            message,
-            settings.EMAIL_HOST_USER,
-            [project.beneficiary.email],
+            [str(project.beneficiary.email),],
             fail_silently=settings.FAIL_SILENTLY,
 
         )
