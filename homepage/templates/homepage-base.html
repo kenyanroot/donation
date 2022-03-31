@@ -27,9 +27,7 @@
         .nav-colour {
             background-color: #671e2d;
         }
-        .navbar-toggler-icon {
-    background-image: url(data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(0, 0, 0, 0.5)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E);
-}
+
         li a:hover {
             background-color: #a9a9a9;
             color: #FFFFFF;
@@ -90,7 +88,9 @@
      {% if request.user.is_authenticated %}
          <li class="nav-item">
         <a class="nav-link" href="{% url 'logout' %}">Sign Out</a>
+
       </li>
+          <li class="nav-item" > <a  class="nav-link" href="{% url 'profile_redirect' %}">  <i class="fa fa-user" aria-hidden="true"> Profile</i></a></li>
         {% else %}
        <li class="nav-item">
         <a class="nav-link" href="{% url 'login' %}">Sign in</a>
@@ -111,16 +111,17 @@
 
         </div>
       </li>
+
+
+
+
+
           {% endif %}
 
 
     </ul>
-  <ul>{% if request.user.is_authenticated %}
 
-        <a href="{% url 'profile_redirect' %}">  <i class="fa fa-user" aria-hidden="true"> Profile</i></a>
-      {% endif %}
 
-  </ul>
 {#    <form class="form-inline my-2 my-lg-0">#}
 {#      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">#}
 {#      <button style="border: #FFFFFF 1px solid; background-color:  #999" class="btn  my-2 my-sm-0" type="submit">Search</button>#}
