@@ -209,7 +209,7 @@ def signup_beneficiary(request):
 
                 )
 
-                return HttpResponse('signup successfull ')
+                return redirect('login')
 
         else:
             messages.info(request, 'Your passwords do not match')
