@@ -12,8 +12,8 @@ def index(request):
     causes_count=Donations.objects.all().count()
     pickup_stations_count=PickupStations.objects.all().count()
     context = {
-        'donations': Donations.objects.all()[:3],
-        'ngodonations':NGOdonations.objects.all(),
+        'donations': Donations.objects.all().filter(delivered=False)[:3],
+        'ngodonations':NGOdonations.objects.all().filter(delivered=False),
         'donations_count': donations_count,
         'pickup_stations': pickup_stations,
         'beneficiaries_count': beneficiaries_count,
@@ -32,7 +32,13 @@ class CausesList(ListView):
     def get_context_data(self, **kwargs):
         context = super(CausesList, self).get_context_data(**kwargs)
         context['pickup_stations'] = PickupStations.objects.all()
+        context['ngodonations'] = NGOdonations.objects.all().filter(delivered=False)
+        context['bendonations']=Donations.objects.all().filter(delivered=False)
+
 
         return context
+
+
+
 
 

@@ -21,7 +21,9 @@
 				<ul>
                     {% for donation in donations %}
 					<li>
+                    {% if donation.poster %}
 						<figure><img src="{{ donation.poster.url }}" alt=""></figure>
+                    {% endif %}
 						<h4>{{ donation.donor }}{% if  donation.delivered  %}  <i class="approved">Done</i>  {% else %} <i class="pending">Pending</i> {% endif %}</h4>
 						<ul class="booking_details">
 							<li><strong>Created date</strong> {{ donation.date_added }}</li>

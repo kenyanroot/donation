@@ -61,7 +61,7 @@ def ngo_donations(request):
 
     return render(request, 'ngo_donations_list.html', context)
 
-
+@login_required()
 def create_donation(request):
     # create a donation
     if request.method == 'POST':

@@ -23,12 +23,15 @@
         <div class="container">
             <div class="flex-row">
 {#            <div class="our_cuauses_single owl-theme">#}
-                {% for i in object_list %}
+                {% for i in bendonations %}
+
 
 
 
                 <div class="card item" style="width: 33%;">
+                {% if i.poster  %}
                     <img class="card-img-top" style="max-height:250px;" src=" {{ i.poster.url }}" alt="Card image cap">
+                    {% endif %}
                     <div  style="height: auto;" class="card-body">
                         <h5 class="card-title">{{ i.title}}</h5>
                         <p class="card-text">{{ i.donatio_description }}</p><br>
@@ -37,6 +40,26 @@
                 </div>
 
                 {% endfor %}
+            {% if ngodonations %}
+             {% for i in ngodonations %}
+
+
+
+
+                <div class="card item" style="width: 33%;">
+                    {% if i.poster  %}
+                    <img class="card-img-top" style="max-height:250px;" src=" {{ i.poster.url }}" alt="Card image cap">
+                    {% endif %}
+                    <div  style="height: auto;" class="card-body">
+                        <h5 class="card-title">{{ i.title}}</h5>
+                        <p class="card-text">{{ i.donatio_description }}</p><br>
+                        <a href="{% url 'donate' i.pk %}" style="background-color: #671e2d;" class="btn btn-primary">Donate</a>
+                    </div>
+                </div>
+
+                {% endfor %}
+            {% endif %}
+
 
             </div>
 

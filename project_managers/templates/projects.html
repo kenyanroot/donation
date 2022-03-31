@@ -31,7 +31,9 @@
                     <ul>
                         {% for donation in object_list %}
                             <li>
-                                <figure><img src="{{ donation.poster.url }}" alt=""></figure>
+                               {% if donation.poster %}
+						<figure><img src="{{ donation.poster.url }}" alt=""></figure>
+                    {% endif %}
                                 <h4> Delivery: {% if  donation.delivered == True %}
                                     <i class="approved">Done</i>  {% else %} <i class="pending">Pending</i> {% endif %}
                                 </h4>

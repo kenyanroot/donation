@@ -155,12 +155,13 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <div style="width:100%;"class="flex-lg-row align-content-center justify-content-center align-items-center">
+                    <div style="width:100%;"class="flex-md-row align-content-center justify-content-center align-items-center">
 
                         {% for i in donations %}
                             <div class="card item"  style=" max-width:300px; box-shadow: 3px 5px #888888;">
-                                <img class="card-img-top" style="max-height:250px;" src=" {{ i.poster.url }}"
-                                     alt="Card image cap">
+                               {% if i.poster  %}
+                    <img class="card-img-top" style="max-height:250px;" src=" {{ i.poster.url }}" alt="Card image cap">
+                    {% endif %}
                                 <div style="height: auto;" class="card-body">
                                     <h5 class="card-title">{{ i.title }}</h5>
                                     <p class="card-text">{{ i.donatio_description }}</p><br>
@@ -182,8 +183,9 @@
                         {% for i in ngodonations %}
 
                             <div class="card item" style="max-width: 300px; box-shadow: 3px 5px #888888;">
-                                <img class="card-img-top" style="max-height:250px;" src=" {{ i.poster.url }}"
-                                     alt="Card image cap">
+                                {% if i.poster  %}
+                    <img class="card-img-top" style="max-height:250px;" src=" {{ i.poster.url }}" alt="Card image cap">
+                    {% endif %}
                                 <div style="height: auto;" class="card-body">
                                     <h5 class="card-title">{{ i.title }}</h5>
                                     <p class="card-text">{{ i.donatio_description }}</p><br>
