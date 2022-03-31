@@ -146,7 +146,7 @@
                         <p style="color: #a9a9a9;"><i style="color:#671e2d !important;
                                 " class="material-icons">people</i></p>
                         <p class="counter-wrapper"><span style="color: #a9a9a9;">3</span></p>
-                        <p style="color: #a9a9a9;"  class="text-block">Volunteers</p>
+                        <p style="color: #a9a9a9;" class="text-block">Volunteers</p>
                     </div>
                 </div>
             </div>
@@ -158,23 +158,19 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <div class="our_cuauses_single owl-carousel owl-theme">
+                    <div style="width:100%;"class="flex-lg-row align-content-center justify-content-center align-items-center">
 
-                            {% for i in donations %}
-
-
-
-
-
-
-                                    <div class="card item" style="width: 100%;">
-                                        <img class="card-img-top" style="max-height:250px;" src=" {{ i.poster.url }}" alt="Card image cap">
-                                        <div  style="height: auto;" class="card-body">
-                                            <h5 class="card-title">{{ i.title}}</h5>
-                                            <p class="card-text">{{ i.donatio_description }}</p><br>
-                                            <a href="{% url 'donate' i.pk %}" style="background-color: #671e2d;" class="btn btn-primary">Donate</a>
-                                        </div>
-                                    </div>
+                        {% for i in donations %}
+                            <div class="card item"  style=" max-width:300px; box-shadow: 3px 5px #888888;">
+                                <img class="card-img-top" style="max-height:250px;" src=" {{ i.poster.url }}"
+                                     alt="Card image cap">
+                                <div style="height: auto;" class="card-body">
+                                    <h5 class="card-title">{{ i.title }}</h5>
+                                    <p class="card-text">{{ i.donatio_description }}</p><br>
+                                    <a href="{% url 'donate' i.pk %}" style="background-color: #671e2d;"
+                                       class="btn btn-primary">Donate</a>
+                                </div>
+                            </div>
 
 
 
@@ -184,7 +180,25 @@
 
 
 
-                            {% endfor %}
+                        {% endfor %}
+
+                        {% for i in ngodonations %}
+
+                            <div class="card item" style="max-width: 300px; box-shadow: 3px 5px #888888;">
+                                <img class="card-img-top" style="max-height:250px;" src=" {{ i.poster.url }}"
+                                     alt="Card image cap">
+                                <div style="height: auto;" class="card-body">
+                                    <h5 class="card-title">{{ i.title }}</h5>
+                                    <p class="card-text">{{ i.donatio_description }}</p><br>
+                                    <a href="{% url 'donate' i.pk %}" style="background-color: #671e2d;"
+                                       class="btn btn-primary">Donate</a>
+                                </div>
+                            </div>
+
+
+
+                        {% endfor %}
+
 
 
                     </div>

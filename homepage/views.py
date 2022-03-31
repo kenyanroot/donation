@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.views.generic import ListView
 
 from beneficiaries.models import Donations,PickupStations
+from NGO.models import NGOdonations
 # Create your views here.
 def index(request):
 
@@ -11,7 +12,8 @@ def index(request):
     causes_count=Donations.objects.all().count()
     pickup_stations_count=PickupStations.objects.all().count()
     context = {
-        'donations': Donations.objects.all()[:10],
+        'donations': Donations.objects.all()[:3],
+        'ngodonations':NGOdonations.objects.all(),
         'donations_count': donations_count,
         'pickup_stations': pickup_stations,
         'beneficiaries_count': beneficiaries_count,

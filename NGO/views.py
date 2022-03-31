@@ -88,6 +88,7 @@ def create_donation(request):
                                     poster=poster, donatio_description=donatio_description,
                                     dropoff_address=dropoff_address)
             donation.save()
+            print(poster)
             messages.success(request, 'Your donation has been created!')
 
             pm = ProjectManager.objects.filter(pk=project_managers).get()

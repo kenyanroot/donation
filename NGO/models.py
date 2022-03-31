@@ -39,7 +39,7 @@ class NGOdonations(models.Model):
     delivered = models.BooleanField(default=False)
     delivered_date = models.DateTimeField(null=True, blank=True)
     delivery_failed = models.BooleanField(default=False)
-    delivery_failed_reason = models.CharField(max_length=100)
+    delivery_failed_reason = models.CharField(max_length=100,blank=True)
     dropoff_address = models.CharField(max_length=200)
     date_added = models.DateTimeField(auto_now_add=True)
     accepted= models.BooleanField(default=False)

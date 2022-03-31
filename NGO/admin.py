@@ -12,7 +12,8 @@ admin.site.register(NgoProfile,NgoProfileAdmin)
 
 #register NGOdonations to admin
 class NGOdonationsAdmin(admin.ModelAdmin):
-    list_display = ('beneficiary','project_managers','donation_type')
+    list_display = ('donatio_description','donor','project_managers','donation_type')
+
 
 admin.site.register(NGOdonations,NGOdonationsAdmin)
 

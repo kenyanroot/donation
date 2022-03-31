@@ -7,7 +7,7 @@ from django.core.paginator import Paginator
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.views.generic import UpdateView
-
+from NGO.models import NGOdonations
 from beneficiaries.models import Donations, PickupStations
 from .forms import DonorForm
 # Create your views here.
@@ -49,17 +49,21 @@ class DonorView(UpdateView):
 def donations(request):
     donor = Donors.objects.filter(user=request.user).get()
     pk = Donors.objects.filter(user=request.user).get().pk
+    ngodonations=NGOdonations.objects.all()
     donations_list = Donations.objects.filter(donor=donor).all()
     paginator = Paginator(donations_list, 8)
     page = request.GET.get('page')
     donations = paginator.get_page(page)
-    return render(request, 'donations.html', {'donations': donations, 'pk': pk, })
+    return render(request, 'donations.html', {'donations': donations, 'pk': pk, 'ngodonations':ngodonations,})
 
 
 @login_required(login_url='/login/redirect')
 def donate(request, pk):
     if request.method == 'POST':
-        donation = Donations.objects.filter(id=pk).get()
+        try:
+            donation = Donations.objects.filter(pk=pk).get()
+        except Donations.DoesNotExist:
+            donation=NGOdonations.objects.filter(pk=pk).get()
         description = request.POST['description']
         dropoff_address = request.POST['pickupCenter']
         try:
@@ -109,15 +113,21 @@ def donate(request, pk):
         pickups = PickupStations.objects.all()
         try:
             pk = Donors.objects.filter(user=request.user).get().pk
+            try:
+                donations=Donations.objects.filter(pk=pkay).get()
+            except:
+                donations=NGOdonations.objects.filter(pk=pkay).get()
+                print(donations,'llllllllllllllllll')
             context = {
-                'donation': Donations.objects.filter(pk=pkay).get(),
+
+                'donation': donations,
                 'pickup_stations': pickups,
                 'pk': pk,
             }
             return render(request, 'donate.html', context)
         except Exception as e:
             print(e)
-            messages.error(request, 'Please create a donor account to donate')
+            messages.error(request, 'an error occured')
             return redirect('signup_donor')
 
 

@@ -32,7 +32,7 @@
                         {% for donation in object_list %}
                             <li>
                                 <figure><img src="{{ donation.poster.url }}" alt=""></figure>
-                                <h4> Delivery: {% if  donation.delivered %}
+                                <h4> Delivery: {% if  donation.delivered == True %}
                                     <i class="approved">Done</i>  {% else %} <i class="pending">Pending</i> {% endif %}
                                 </h4>
                                 <ul class="booking_details">
@@ -45,6 +45,7 @@
                                     {% endif %}
 
                                     <li><strong>Project Manager: </strong> {{ donation.project_managers }}</li><br>
+                                {% if   donation.accepted == True %}
                                     <form method="post" enctype="multipart/form-data"
                                           action="{% url 'upload_progress_reports' donation.pk %}">{% csrf_token %}
                                         <li>
@@ -56,12 +57,15 @@
                                                    class="btn_1 gray "></li>
 {##}
 {#                                        {% for i in  donation.progress_report %}#}
+
                                        {% if donation.progress_report.file  %}
                               <li><a href="{{ donation.progress_report.file.url  }}" target="_blank">Progress Report: {{ donation.progress_report.name }}</a> </li>
                         {% endif %}
                                     </form>
                                 </ul>
+                            {% endif %}
                                 <ul class="buttons">
+                                {% if donation.delivered == False %}
                                     {% if donation.accepted == False %}
                                     <li><a href="{% url 'accept_project' donation.pk %}" class="btn_1 gray approve"><i
                                             class="fa fa-fw fa-check-circle-o"></i> Accept</a></li>
@@ -71,6 +75,7 @@
                                             class="fa fa-fw fa-times-circle-o"></i> Reject</a></li>
 
                                     {% endif %}
+                                {% endif %}
 
                                 </ul>
                             </li>

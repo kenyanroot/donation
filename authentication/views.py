@@ -503,7 +503,7 @@ def loginRedirect(request):
                     return redirect('login')
                 else:
 
-                    HttpResponseRedirect(request.POST.get('next','/'))
+                    HttpResponseRedirect(request.META.HTTP_REFERER)
 
         else:
             messages.error(request, 'Invalid credentials')

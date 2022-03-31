@@ -42,11 +42,40 @@
 {#						</ul>#}
 					</li>
                         {% empty %}
-                        <h4>No donations Made</h4>
+
 
                     {% endfor %}
 
 				</ul>
+            <ul>
+                {% for donation in ngodonations %}
+					<li>
+{#						<figure><img src="{{ donation.poster.url }}" alt=""></figure>#}
+						<h4>{{ donation.donor }}{% if  donation.delivered  %}  <i class="approved">Done</i>  {% else %} <i class="pending">Pending</i> {% endif %}</h4>
+						<ul class="booking_details">
+							<li><strong>Created date</strong> {{ donation.date_added }}</li>
+							<li><strong>Description:</strong>{{ donation.donatio_description }} </li>
+							<li><strong>Dropoff </strong> {{ donation.dropoff_address }}</li>
+							<li><strong>Delivered:</strong> {{ donation.delivered }}</li>
+                            {% if donation.delivered %}
+							<li><strong>Donor</strong> {{ donation.donor }}</li>
+                            {% endif %}
+                        <li><strong>Project Manager:</strong> {{ donation.project_managers }}</li>
+                        {% if donation.progress_report.file  %}
+                              <li><a href="{{ donation.progress_report.file.url  }}" target="_blank">Progress Report: {{ donation.progress_report.name }}</a> </li>
+                        {% endif %}
+						</ul>
+{#						<ul class="buttons">#}
+{#							<li><a href="#0" class="btn_1 gray approve"><i class="fa fa-fw fa-check-circle-o"></i> Approve</a></li>#}
+{#							<li><a href="#0" class="btn_1 gray delete"><i class="fa fa-fw fa-times-circle-o"></i> Cancel</a></li>#}
+{#						</ul>#}
+					</li>
+                        {% empty %}
+
+                    {% endfor %}
+
+
+            </ul>
 			</div>
 		</div>
 		<!-- /box_general-->
