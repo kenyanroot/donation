@@ -19,10 +19,15 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <div style="background-image: url('{% static "img/donation1.jpg" %}');"
+                    <div style="background-image: url('{% static "img/bg2.jpg" %}');
+                            background-size: contain;
+                            background-position: center;
+                            background-size: cover;
+
+                            "
                          class="client owl-carousel owl-theme">
                         <div class="item">
-                            <div class="text">
+                            <div  style="padding: 20px;" class="text">
                                 <h3>YOUR COMMUNITY NEEDS YOUR HELP</h3>
                                 <p>Like our name suggests, we are here to enable. We Connect the more privileged with
                                     those in need.<br> Click on the Donate button to view the causes listed on Uwezo
@@ -94,14 +99,6 @@
                     <p>The little things, The least noticeable ones often make the most difference. Whatever little or
                         much contribution you have can go a long way</p>
 
-                    {#                        <div class="progress-text">#}
-                    {#                            <p class="progress-top">50%</p>#}
-                    {#                            <div class="progress">#}
-                    {#                                <div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:50%"></div>#}
-                    {#                            </div>#}
-                    {#                            <p class="progress-left">Raised: $1200</p>#}
-                    {#                            <p class="progress-right">Goal: $2400</p>#}
-                    {#                        </div>#}
                     <h2><a href="{% url 'causes' %}">View Causes</a></h2>
                 </div>
             </div>
