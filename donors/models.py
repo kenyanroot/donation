@@ -12,7 +12,7 @@ class Donors(models.Model):
     address = models.CharField(max_length=100)
     contact_number = models.CharField(max_length=100)
     email = models.EmailField(max_length=100)
-    profile_picture = models.ImageField(upload_to='beneficiaries/profile_pictures/')
+    profile_picture = models.ImageField(upload_to='beneficiaries/profile_pictures/',blank=True, null=True)
     date_added = models.DateTimeField(auto_now_add=True)
     email_confirmed = models.BooleanField(default=False)
 

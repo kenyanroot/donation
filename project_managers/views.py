@@ -28,6 +28,7 @@ def pmpage(request):
         form = ProjectManagerForm()
         context = {
             'form': form,
+            'pm': ProjectManager.objects.get(user=request.user),
         }
 
         return render(request, 'project_managers.html',context)
@@ -44,6 +45,7 @@ class UpdatePm(UpdateView):
         context = super().get_context_data(**kwargs)
 
         context['pk'] = ProjectManager.objects.get(user=self.request.user).pk
+        context['pm'] = ProjectManager.objects.get(user=self.request.user)
         print(context['pk'])
         return context
 
@@ -54,9 +56,11 @@ def  projects_list(request):
     # reports =  NGOdonations.objects.filter(project_managers=ProjectManager.objects.get(user=request.user)).get().donatio_description#ProgressReports.objects.filter(project_manager=ProjectManager.objects.get(user=request.user)).all()
     # print(reports)
     pk=ProjectManager.objects.get(user=request.user).pk
+    pm=ProjectManager.objects.get(pk=pk)
     context = {
         'object_list': projects,
-        'pk':pk
+        'pk':pk,
+        'pm':pm
     }
     return render(request, 'projects.html', context)
 
@@ -70,6 +74,8 @@ class Projects(ListView):
         context = super().get_context_data(**kwargs)
         context['pk'] = ProjectManager.objects.get(user=self.request.user).pk
         pk = context['pk']
+        pm = ProjectManager.objects.get(pk=pk)
+        context['pm'] = pm
         #
         # project_manager= P.objects.get(user=self.request.user).progress_reports.all()
         #

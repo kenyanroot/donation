@@ -25,6 +25,7 @@ class UpdateBeneficiaries(UpdateView):
     def get_context_data(self, **kwargs):
         context = super(UpdateBeneficiaries, self).get_context_data(**kwargs)
         context['pk'] = Beneficiary.objects.get(user=self.request.user).pk
+        context['beneficiary'] = Beneficiary.objects.get(user=self.request.user)
         print(context['pk'])
         return context
 
@@ -61,6 +62,7 @@ def beneficiary(request):
         form = BeneficiaryForm()
         context = {
             'form': form,
+            'beneficiary':Beneficiary.objects.get(user=self.request.user),
         }
         return render(request, 'beneficiaries.html', context)
 
@@ -71,7 +73,9 @@ def donations(request):
     donations=Donations.objects.filter(beneficiary=beneficiary).all()
     context={
         'donations':donations,
-        'pk':pk
+        'pk':pk,
+        'beneficiary':beneficiary,
+
     }
 
     return render(request, 'donations_ben.html', context)
@@ -104,6 +108,7 @@ def create_donation(request):
 
 
     else:
+        beneficiary=Beneficiary.objects.get(user=request.user)
         project_managers=ProjectManager.objects.all()
         pickup_centers=PickupStations.objects.all()
         pk=Beneficiary.objects.get(user=request.user).pk
@@ -112,7 +117,8 @@ def create_donation(request):
         context = {
             'project_managers': project_managers,
             'pickup_centers': pickup_centers,
-            'pk':pk
+            'pk':pk,
+            'beneficiary':beneficiary,
         }
 
 

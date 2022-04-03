@@ -27,6 +27,7 @@ class DonorView(UpdateView):
     def get_context_data(self, **kwargs):
         context = super(DonorView, self).get_context_data(**kwargs)
         context['pk'] = Donors.objects.get(user=self.request.user).pk
+        context['donor']=Donors.objects.get(user=self.request.user)
         print('hhhhhhhhhh',context['pk'])
         return context
 
@@ -54,7 +55,7 @@ def donations(request):
     paginator = Paginator(donations_list, 8)
     page = request.GET.get('page')
     donations = paginator.get_page(page)
-    return render(request, 'donations.html', {'donations': donations, 'pk': pk, 'ngodonations':ngodonations,})
+    return render(request, 'donations.html', {'donations': donations, 'pk': pk, 'ngodonations':ngodonations,'donor':donor})
 
 
 @login_required(login_url='/login/redirect')

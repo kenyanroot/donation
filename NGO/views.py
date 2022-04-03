@@ -40,10 +40,12 @@ def ngoprofile(request):
             return redirect('ngoprofile')
 
     else:
+        ngo=NgoProfile.objects.get(user=request.user)
 
         form = NgoProfileForm()
         context = {
             'form': form,
+            'ngo':ngo,
         }
         return render(request, 'ngo.html', context)
 
