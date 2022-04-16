@@ -27,7 +27,7 @@ class UpdateNgo(UpdateView):
         return context
 
 
-@login_required
+@login_required()
 def ngoprofile(request):
     if request.method == 'POST':
         form = NgoProfileForm(request.POST)
