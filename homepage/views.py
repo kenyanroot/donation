@@ -9,7 +9,7 @@ def index(request):
     donations_count=Donations.objects.all().count()
     pickup_stations=PickupStations.objects.all()
     beneficiaries_count=Donations.objects.all().count()
-    causes_count=Donations.objects.all().count()
+    causes_count=Donations.objects.all().count()+NGOdonations.objects.all().count()
     pickup_stations_count=PickupStations.objects.all().count()
     context = {
         'donations': Donations.objects.all().filter(delivered=False)[:3],

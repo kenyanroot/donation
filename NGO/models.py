@@ -49,7 +49,7 @@ class NGOdonations(models.Model):
         return reverse('beneficiaries:detail', kwargs={'pk': self.pk})
 
     def __str__(self):
-        return self.donation_type
+        return self.beneficiary.first_name + ' ' + self.beneficiary.last_name
 
     class Meta:
         verbose_name_plural = 'Donations'
