@@ -29,7 +29,7 @@ class NgoProfile(models.Model):
         verbose_name_plural = 'None Governmental Organizations'
 
 class NGOdonations(models.Model):
-    beneficiary = models.ForeignKey(NgoProfile, on_delete=models.CASCADE)
+    beneficiary = models.ForeignKey(NgoProfile, on_delete=models.CASCADE, blank=True, null=True)
     donor = models.ForeignKey(Donors, on_delete=models.CASCADE, blank=True, null=True)
     project_managers = models.ForeignKey(ProjectManager, on_delete=models.CASCADE, blank=True, null=True)
     amount = models.IntegerField(null=True, blank=True)
